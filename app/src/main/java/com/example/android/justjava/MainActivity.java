@@ -1,6 +1,6 @@
 package com.example.android.justjava;
 
-import android.icu.text.NumberFormat;
+//import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,10 +22,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Total: $" + (quantity*5);
-        priceMessage = priceMessage + "\nThank You.";
-        displayMessage(priceMessage);
-//        displayPrice(quantity * 5);
+        int price = calculatePrice();
+        createOrderSummary(price);
     }
 
     /**
@@ -46,19 +44,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * This method displays the given quantity value on the screen.
-     */
-    private void displayQuantity(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+    private void createOrderSummary(int price){
+        String priceMessage = "Name: Dante Casanova\n";
+        priceMessage = priceMessage + "Quantity: " + quantity + "\n";
+        priceMessage = priceMessage + "Total: $" + price + "\n";
+        priceMessage = priceMessage + "Thank You.";
+        displayMessage(priceMessage);
     }
 
     /**
-     * This method displays the given price value on the screen.
+     * This method displays the given quantity value on the screen.
+     */
+    private void displayQuantity(int numberOfCoffees) {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        quantityTextView.setText("" + numberOfCoffees);
+    }
+
+    /**
+     * This method calculates the given price value on the screen.
+     *
+     * @param quantity of coffees ordered
      */
 
-    private int calculatePrice(int quantity) {
+    private int calculatePrice() {
         int price = quantity * 5;
         return price;
     }
