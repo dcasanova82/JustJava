@@ -4,6 +4,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
@@ -11,7 +12,6 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
     int quantity = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +23,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         int price = calculatePrice();
-        displayMessage(createOrderSummary(price));
+
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_cb);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate));
     }
 
     /**
@@ -47,10 +54,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Create a summary of an order
      * @param price
+     * @param hasWhippedCream
+     * @param hasChocolate
      * @return priceMessage
      */
-    private String createOrderSummary(int price){
+    private String createOrderSummary(int price, boolean addWhippedCream, boolean addChocolate) {
         String priceMessage = "Name: Dante Casanova\n";
+        priceMessage = priceMessage + "Add Whipped Cream?" + addWhippedCream + "\n";
+        priceMessage = priceMessage + "Add Chocolate?" + addChocolate + "\n";
         priceMessage = priceMessage + "Quantity: " + quantity + "\n";
         priceMessage = priceMessage + "Total: $" + price + "\n";
         priceMessage = priceMessage + "Thank You.";
@@ -83,4 +94,6 @@ public class MainActivity extends AppCompatActivity {
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
     }
+
+
 }
