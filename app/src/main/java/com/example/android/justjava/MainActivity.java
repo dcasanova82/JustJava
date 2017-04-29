@@ -3,6 +3,7 @@ package com.example.android.justjava;
 //import android.icu.text.NumberFormat;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -12,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.R.attr.format;
+import static android.R.attr.name;
 
 /**
  * This app displays an order form to order coffee.
@@ -80,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
      * @return priceMessage
      */
     private void createOrderSummary(String addName, boolean addWhippedCream, boolean addChocolate, int price) {
-        String priceMessage = "Name: " + addName + "\n";
-        priceMessage = priceMessage + "Add Whipped Cream? " + addWhippedCream + "\n";
-        priceMessage = priceMessage + "Add Chocolate? " + addChocolate + "\n";
-        priceMessage = priceMessage + "Quantity: " + quantity + "\n";
-        priceMessage = priceMessage + "Total: $" + price + "\n";
-        priceMessage = priceMessage + "Thank You.";
-        String subject = "Just Java Order for: " + addName + "\n";
+        String priceMessage = getString(R.string.order_summary_name, addName);
+        priceMessage += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
+        priceMessage += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+        priceMessage += "\n" + getString(R.string.order_summary_quantity, quantity);
+        priceMessage += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance().format(price));
+        priceMessage += "\n" + getString(R.string.thank_you);
+        String subject = getString(R.string.order_summary_email_subject, addName);
         composeEmail(subject, priceMessage);
 //        return priceMessage;
     }
