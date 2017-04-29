@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:text="@string/whipped_cream"
             android:textSize="16sp"
-            android:paddingLeft="24dp"
+            android:paddingLeft="56dp"
+            android:layout_marginLeft="8dp"
             />
         <CheckBox
             android:id="@+id/chocolate_checkbox"
@@ -40,7 +41,8 @@
             android:layout_height="wrap_content"
             android:text="@string/chocolate"
             android:textSize="16sp"
-            android:paddingLeft="24dp"
+            android:paddingLeft="56dp"
+            android:layout_marginLeft="8dp"
             />
         <TextView
             android:text="@string/quantity"
